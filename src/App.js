@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HomePage from "./pages/HomePage";
+import Navbar from "./components/Navbar"
 
 const App = () => {
   const [path, setPath] = useState("/home");
@@ -10,6 +11,7 @@ const App = () => {
 
   return (
     <div>
+    <Navbar />
       {path === '/home' && <HomePage navigate={navigate} />}
     </div>
   );
