@@ -11,35 +11,15 @@ export async function FindAll() {
     console.error("FindAll", error);
   }
 }
-// export async function FindByStatus(status) {
-//   try {
-//     let result = [];
-//     for (let index = 0; index < status.length; index++) {
-//       const element = status[index];
-//       const { data, error } = await supabase
-//         .from("mainTable")
-//         .select("*")
-//         .eq("status", element)
-//         .order("createdDate", { ascending: false })
-//         .order("processDate", { ascending: false })
-//         .order("finishedDate", { ascending: false });
-//       if (error) throw error;
-//       result = [...result, ...data];
-//     }
-//     return result;
-//   } catch (error) {
-//     console.error("FindBy", error);
-//   }
-// }
-// export async function Insert(value) {
-//   try {
-//     const { data, error } = await supabase.from("mainTable").insert([value]);
-//     if (error) throw error;
-//     console.log("Insert", data);
-//   } catch (error) {
-//     console.error("Insert", error);
-//   }
-// }
+export async function Insert(value) {
+  try {
+    const { data, error } = await supabase.from("Goods").insert([value]).select();
+    if (error) throw error;
+    console.log("Insert", data);
+  } catch (error) {
+    console.error("Insert", error);
+  }
+}
 
 // export async function UpdateStatus(id, value) {
 //   try {

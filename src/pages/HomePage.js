@@ -12,18 +12,17 @@ function HomePage(){
     }, []);
 
     return (<div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-        {rows.length <=0 ? 
-          <h3>Kayıt Yok</h3>
-          : rows.map((row, key) => (
+        {rows.length <=0 && <h3>Kayıt Yok</h3>}
+        {rows.length >0 && <div className="grid grid-cols-4 gap-4 content-evenly ...">
+         {rows.map((row, key) => (
             <div key={row.uuid}>
             <span>{row.name}</span>
-            <img alt={row.name} src={row.icon} width={50} height={50}/>
+            <img alt={row.name} src={row.icon==="" ? "item.png" : row.icon} width={150} height={150}/>
             <span>{row.price}₺</span>
             <span>{100*parseFloat(row.vat)}%</span>
+            </div>))}
             </div>
-            
-        ))}
-
+        }
     </div>);
     }
 
