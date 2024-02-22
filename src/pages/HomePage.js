@@ -4,8 +4,12 @@ import { FindAll } from "../goodsTableHandler";
 function HomePage(){
     const [rows, setRows] = useState([]);
     async function loadData() {
-        const data = await FindAll();
-        setRows(data);
+        try {
+            const data = await FindAll();
+            setRows(data);
+        } catch (error) {
+        console.log(error)            
+        }
     }
     useEffect(() => {
         loadData();

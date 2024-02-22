@@ -26,21 +26,25 @@ function AddItem() {
         console.log("Please enter the details!")
     }
     else{
+      try {
         await Insert(state);
         setState({"name":"","detail":"","price":"0","vat":"0.18","icon":""});
+      } catch (error) {
+        console.log(error)
+      }
     }
 
   }
 
   return (
-    <div className="h-screen flex items-center justify-center flex-col">
-      <b>Add new item</b>
-      <div className="flex flex-col">
+    <div className="flex items-center justify-center flex-col">
+      <b className="text-slate-900">Add new item</b>
+      <div className="flex flex-col border-slate-900 border-2">
         <div className="py-4">
           <label className="mx-2">Name</label>
           <input type="text" placeholder="item name" 
           onChange={(e) => setField({ name: "name", e: e })}
-          value={state?.name}
+          value={state?.name}                                          
           />
         </div>
         <div className="py-4">
