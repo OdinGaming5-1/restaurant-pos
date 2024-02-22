@@ -60,18 +60,18 @@ export async function FindByName(name){
 //   }
 // }
 
-// export async function UpdateRow(value) {
-//   try {
-//     const { error } = await supabase
-//       .from("mainTable")
-//       .update(value)
-//       .eq("id", value.id);
-//     if (error) throw error;
-//     console.log("Update");
-//   } catch (error) {
-//     console.error("Update", error);
-//   }
-// }
+export async function UpdateRow(value) {
+  try {
+    const { error } = await supabase
+      .from("Goods")
+      .update(value)
+      .eq("uuid", value.uuid);
+    if (error) throw error;
+    console.log("Update");
+  } catch (error) {
+    console.error("Update", error);
+  }
+}
 // export async function DeleteById(value) {
 //   try {
 //     const { error } = await supabase.from("mainTable").delete().eq("id", value);
