@@ -2,17 +2,23 @@ import React,{useState} from "react";
 import { Insert } from "../goodsTableHandler";
 
 function AddItem() {
-  const [state, setState] = useState({"name":"","detail":"","price":"0","vat":"0.18","icon":""});
+  const [state, setState] = useState({"name":"","detail":"","price":"0","vat":"0.18","icon":"","category":"meyve","barcode":"000"});
   const setField = ({ name, e }) => {
     setState({
       ...state,
       [name]: e.target.value,
     });
   };
-  const setFieldOption = (e) => {
+  const setFieldOptionVat = (e) => {
     setState({
       ...state,
       ["vat"]: e.target.value,
+    });
+  };
+  const setFieldOptionCat = (e) => {
+    setState({
+      ...state,
+      ["category"]: e.target.value,
     });
   };
 
@@ -28,7 +34,7 @@ function AddItem() {
     else{
       try {
         await Insert(state);
-        setState({"name":"","detail":"","price":"0","vat":"0.18","icon":""});
+        setState({"name":"","detail":"","price":"0","vat":"0.18","icon":"","category":"meyve","barcode":"000"});
       } catch (error) {
         console.log(error)
       }
@@ -55,6 +61,12 @@ function AddItem() {
           />
         </div>
         <div className="py-4">
+          <label className="mx-2">Category</label>
+          <select defaultValue={0} className="mx-2" onChange={setFieldOptionCat}>
+            <option key={"meyve"} value={"meyve"}>Meyve</option>
+          </select>
+        </div>
+        <div className="py-4">
           <label className="mx-2">Price</label>
           <input type="number" step="0.01" 
             onChange={(e) => setField({ name: "price", e: e })}
@@ -63,9 +75,9 @@ function AddItem() {
         </div>
         <div className="py-4">
           <label className="mx-2">VAT</label>
-          <select defaultValue={1} className="mx-2" onChange={setFieldOption}>
-            <option key={0.08} value={0.08}>8%</option>
+          <select defaultValue={1} className="mx-2" onChange={setFieldOptionVat}>
             <option key={0.18} value={0.18}>18%</option>
+            <option key={0.08} value={0.08}>8%</option>
           </select>
         </div>
         <div className="py-4">
@@ -73,6 +85,13 @@ function AddItem() {
           <input type="text" 
             onChange={(e) => setField({ name: "icon", e: e })}
             value={state?.icon}
+          />
+        </div>
+        <div className="py-4">
+          <label className="mx-2">Barcode:</label>
+          <input type="text" 
+            onChange={(e) => setField({ name: "barcode", e: e })}
+            value={state?.barcode}
           />
         </div>
         <div className="py-4">

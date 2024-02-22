@@ -1,26 +1,25 @@
-import React, { useState, useEffect }  from "react";
-import { FindAll } from "../goodsTableHandler";
+import React,{useState} from "react";
+import { FindByName } from "../goodsTableHandler";
 import Barcode from 'react-jsbarcode';
 
-function HomePage(){
+
+function UpdateItem()
+{
     const [rows, setRows] = useState([]);
-    async function loadData() {
+
+    async function searchItem(e) {
         try {
-            const data = await FindAll();
+            const data = await FindByName(e.target.value);
             setRows(data);
+            console.log(data)
         } catch (error) {
         console.log(error)            
         }
     }
-    useEffect(() => {
-        loadData();
-    }, []);
-
-    
-    return (<div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white h-screen">
-        {rows.length <=0 && <h3>Kayıt Yok</h3>}
-        {rows.length >0 && <div className="grid grid-cols-4 gap-4 content-evenly ...">
-         {rows.map((row, key) => (
+    return (<div className="items-center justify-center bg-slate-900 flex flex-col h-screen">
+    <input type="text" placeholder="search by name..." onChange={searchItem}/>
+    {rows.length <=0 && <h3>Kayıt Yok</h3>}
+    {rows.map((row, key) => (
             <div key={row.uuid} className="flex flex-row">
             <img alt={row.name} src={row.icon==="" ? "item.png" : row.icon} width={100} height={90}/>
             <div width={100} height={90}><Barcode value={row.barcode} options={{displayValue:true,format:"msi",textMargin:"0"}}/></div>
@@ -30,9 +29,7 @@ function HomePage(){
             <span>{100*parseFloat(row.vat)}%</span>
             </div></div>
             </div>))}
-            </div>
-        }
     </div>);
-    }
+}
 
-export default HomePage;
+export default UpdateItem;

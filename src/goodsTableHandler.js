@@ -21,6 +21,19 @@ export async function Insert(value) {
   }
 }
 
+export async function FindByName(name){
+  try {
+    const { data, error } = await supabase
+      .from("Goods")
+      .select("*").ilike("name",'%'+name+'%')
+      .select();
+      if (error) throw error;
+      return data;
+    } catch (error) {
+    console.error("FindByName", error);
+  }
+}
+
 // export async function UpdateStatus(id, value) {
 //   try {
 //     let updateData = {
