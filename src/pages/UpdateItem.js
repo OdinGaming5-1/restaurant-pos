@@ -17,11 +17,11 @@ function UpdateItem()
         }
     }
 
-    return (<div className="items-center justify-top bg-slate-900 flex flex-col px-2 py-2 h-screen">
-    <input type="text" placeholder="search by name..." onChange={searchItem}/>
+    return (<div className="items-center justify-top flex flex-col px-2 py-2 h-screen">
+    <input type="text" placeholder="search by name..." onChange={searchItem} className="px-4 py-4 border-slate-900 border-2"/>
     {rows.length <=0 && <h3>Kayıt Yok</h3>}
     {rows.map((row, key) => (
-            <div key={row.uuid} className="flex flex-row bg-white my-4">
+            <div key={row.uuid} className="flex flex-row bg-white my-4 border-slate-900 border-2 rounded-lg" >
             <Item data={row}/>
             </div>))}
     </div>);

@@ -34,6 +34,19 @@ export async function FindByName(name){
   }
 }
 
+export async function FindByCategory(category){
+  try {
+    const { data, error } = await supabase
+      .from("Goods")
+      .select("*").eq("category",category)
+      .select();
+      if (error) throw error;
+      return data;
+    } catch (error) {
+    console.error("FindByCategory", error);
+  }
+}
+
 // export async function UpdateStatus(id, value) {
 //   try {
 //     let updateData = {

@@ -1,8 +1,9 @@
 import React,{useState} from "react";
 import { Insert } from "../goodsTableHandler";
+import Barcode from 'react-jsbarcode';
 
 function AddItem() {
-  const [state, setState] = useState({"name":"","detail":"","price":"0","vat":"0.18","icon":"","category":"meyve","barcode":"000"});
+  const [state, setState] = useState({"name":"","detail":"","price":"0","vat":"0.18","icon":"logo512.png","category":"meyve","barcode":"000"});
   const setField = ({ name, e }) => {
     setState({
       ...state,
@@ -45,7 +46,12 @@ function AddItem() {
   return (
     <div className="flex items-center justify-center flex-col">
       <b className="text-slate-900">Add new item</b>
-      <div className="flex flex-col border-slate-900 border-2">
+      <div className="flex flex-row border-2 border-slate-900 rounded-lg ">
+      <div className="flex flex-col">
+      <div><img alt={state.name} src={state?.icon} width={100} height={90} className="bg-white"/></div>
+      <div width={100} height={90}><Barcode value={state.barcode} options={{displayValue:true,format:"msi",textMargin:"0"}}/></div>
+      </div>      
+      <div className="flex flex-col ">
         <div className="py-4">
           <label className="mx-2">Name</label>
           <input type="text" placeholder="item name" 
@@ -97,6 +103,7 @@ function AddItem() {
         <div className="py-4">
           <button onClick={insertItem}>Ekle</button>
         </div>
+      </div>
       </div>
     </div>
   );
